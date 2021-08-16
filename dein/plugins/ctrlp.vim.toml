@@ -1,0 +1,69 @@
+[[plugins]]
+repo = 'kein/ctrlp.vim'
+hook_add = '''
+    " # ctrlpに入るときに呼ばれる関数を定義します。この関数を後に紹介する
+    " # g:ctrlp_buffer_funcにセットすることで、ctrlpバッファに入る直前に呼び出されます。
+    " # ステータスラインをctrlpで表示しないように、laststatusを0にセットします。
+    function! CtrlPEnter()
+        set laststatus=0
+    endfunction
+
+    " # ctrlpから出るとき，ステータスラインの表示をonにします
+    function! CtrlPLeave()
+        set laststatus=2
+    endfunction
+
+    " # ctrlpバッファに入る時と出るときに使用する関数を定義します。
+    " # 先ほど定義した関数名をそれぞれenter,exitにセットします。
+    let g:ctrlp_buffer_func = {
+        \ 'enter': 'CtrlPEnter',
+        \ 'exit': 'CtrlPLeave',
+    \ }
+
+    " # ファイルを指定せずにvimを立ち上げた時に，自動的にctrlpを起動する関数を定義
+    function CtrlPIfEmpty()
+        if @% == ""
+            CtrlP ~/
+        endif
+    endfunction
+
+    " # auto command にて先ほど定義した関数をvim起動時に呼び出し。
+    augroup AutoCtrlP
+        autocmd! autocmd VimEnter * call CtrlPIfEmpty()
+    augroup END
+
+    " # ctrlpのキーマッピングを <C-p>から<Leader>eに変更
+    " # 私の場合、yankround.vimで<C-p>を使用しているため、衝突回避
+    let g:ctrlp_map = '<nop>'
+    nnoremap <Tab>e :CtrlP ~/<CR>
+
+    " # 日本語検索をoff（私は基本的にディレクトリやファイル名に日本語を使用しないので）
+    let g:ctrlp_use_migemo = 0
+    " # あいまい検索をoff
+    let g:ctrlp_regexp = 1
+    " # キャッシュを使用して検索を高速化
+    let g:ctrlp_use_caching = 1
+    " # vim終了時にキャッシュをクリアしない
+    let g:ctrlp_clear_cache_on_exit = 0
+    " # <C-r>でキャッシュをクリアして再検索
+    let g:ctrlp_prompt_mappings = { 'PrtClearCache()': ['<C-r>'] }
+    " # 検索の際に200[ms]のウェイトを入れる（１文字入力の度に検索結果がコロコロ変わるのが気に入らないため）
+    " # 検索してほしくないファイルやディレクトリを除外
+    " # ブログの仕様上、半角ドルマークを使用すると編集時に不具合が生じるため、
+    " # 以下では全角のドルマークを使用しています。コピーの際にはご注意ください。
+    let g:ctrlp_custom_ignore = {
+        \ 'dir': '\v[\/]\.(git|hg|svn)＄',
+        \ 'file': '\v\.(exe|so|dll|o)＄',
+        \ 'link': 'some_bad_symbolic_links'
+        \ }
+    " # ctrlpの検索アルゴリズムを変更してみる。コマンド内の %s は検索対象ディレクトリにctrlp内で置き換えられる。
+    " # macにてfindコマンドを使用する場合。
+    let g:ctrlp_user_command = "find -E %s -type f -regex " . g:ctrlp_my_regexp . " 2>/dev/null"
+    " # rcコマンド（ripgrep）が使用できる場合、そちらを使用。
+    if executable('rg')
+        let g:ctrlp_user_command = 'rg --color never --no-messages --files %s | rg --color never ' . g:ctrlp_my_regexp
+    " # agコマンド(the silver searcher)が使用できる場合、そちらを使用。
+    elseif executable('ag')
+        let g:ctrlp_user_command = "ag --nocolor --silent -g " . g:ctrlp_my_regexp . " %s"
+    endif
+'''

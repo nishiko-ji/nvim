@@ -1,0 +1,6 @@
+[[plugins]]
+repo = 'kassio/neoterm'
+hook_add = '''
+  nnoremap <c-t><c-t> :Ttoggle<CR>
+  tnoremap <c-t><c-t> <C-¥><C-n>:Ttoggle<CR>
+'''

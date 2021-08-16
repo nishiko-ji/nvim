@@ -1,0 +1,8 @@
+[[plugins]]
+repo = 'myrobo/smart_tabline.vim'
+hook_add = '''
+  augroup AutoColor
+    autocmd!
+    autocmd Colorscheme * highlight! link TabLine Comment
+  augroup END
+'''

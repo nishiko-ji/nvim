@@ -1,0 +1,5 @@
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+hock_add = '''
+    colorscheme iceberg " カラースキームにicebergを設定する
+'''

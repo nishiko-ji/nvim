@@ -1,0 +1,30 @@
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  set laststatus=2
+  set noshowmode
+  let g:lightline = { 
+    \'colorscheme': 'iceberg',
+    \ 'active': {
+    \   'left': [
+    \     ['mode', 'paste'],
+    \     ['readonly', 'filename', 'modified'],
+    \   ],
+    \   'right': [
+    \     ['lineinfo'],
+    \     ['percent'],
+    \     ['charcode','fileencoding','date'],
+    \   ]
+    \ },
+    \ 'component_function': {
+    \   'date':  'Date',
+    \ },
+    \ 'component_expand': {
+    \ },
+    \ 'component_type': {
+    \ },
+  \}
+  function! g:Date()
+    return strftime("%H:%M")
+  endfunction
+'''
