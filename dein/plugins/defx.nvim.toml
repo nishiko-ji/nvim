@@ -28,7 +28,7 @@ hook_add = '''
 "    \ 'columns': 'indent:git:icons:filename:mark',
 "    \ })
   call defx#custom#option('_', {
-	\ 'columns': 'mark:indent:git:space:icons:space:space:filename:type:size:time',
+	\ 'columns': 'mark:indent:git:space:icon:filename:icons:type:size:time',
     \ 'show_ignored_files': 1,
     \ })
 

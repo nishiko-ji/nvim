@@ -1,0 +1,56 @@
+# deoplete
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+# hook_source = '''
+#   let g:deoplete#enable_at_startup = 1
+#   let g:deoplete#auto_complete_delay = 0
+#   let g:deoplete#auto_complete_start_length = 1
+#   let g:deoplete#enable_camel_case = 0
+#   let g:deoplete#enable_ignore_case = 0
+#   let g:deoplete#enable_refresh_always = 0
+#   let g:deoplete#enable_smart_case = 1
+#   let g:deoplete#file#enable_buffer_path = 1
+#   let g:deoplete#max_list = 10000
+#   let g:lsp_settings = {
+#   \   'pyls-all': {
+#   \     'workspace_config': {
+#   \       'pyls': {
+#   \         'configurationSources': ['flake8']
+#   \       }
+#   \     }
+#   \   },
+#   \}
+#   inoremap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
+#   inoremap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
+# '''
+hook_add = '''
+  let g:deoplete#enable_at_startup = 1
+  inoremap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
+  inoremap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
+'''
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+
+[[plugins]]
+repo = 'deoplete-plugins/deoplete-jedi'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+# hook_add = '''
+#   let g:lsp_diagnostics_enabled = 0
+# '''
+[[plugins]]
+repo = 'lighttiger2505/deoplete-vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'

@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'Shougo/deoplete.nvim' #補完
+depends = [ 'nvim-yarp', 'vim-hug-neovim-rpc' ]
+on_i = 1
+hook_source = '''
+let g:deoplete#enable_at_startup = 1
+'''

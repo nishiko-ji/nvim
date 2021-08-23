@@ -34,12 +34,15 @@ if dein#load_state(s:dein_dir)
 	call dein#load_toml( s:toml_dir . '/lightline.vim.toml', {} )
 	"call dein#load_toml( s:toml_dir . '/ctrlp.vim.toml', {} )
 	call dein#load_toml( s:toml_dir . '/iceberg.vim.toml', {} )
+	call dein#load_toml( s:toml_dir . '/gruvbox-material.toml', {} )
 	call dein#load_toml( s:toml_dir . '/smart_tabline.vim.toml', {} )
 	"call dein#load_toml( s:toml_dir . '/vim-altercmd.toml', {} )
 	call dein#load_toml( s:toml_dir . '/defx-git.toml', {} )
 	call dein#load_toml( s:toml_dir . '/defx-icons.toml', {} )
+	"call dein#load_toml( s:toml_dir . '/vim-devicons.toml', {} )
 	call dein#load_toml( s:toml_dir . '/defx.nvim.toml', {} )
-	
+	call dein#load_toml( s:toml_dir . '/deoplete.nvim.toml', {} )
+	call dein#load_toml( s:toml_dir . '/vim-polyglot.toml', {} )
   call dein#end()
 	call dein#save_state()
 endif
@@ -54,8 +57,11 @@ endif
 set termguicolors   " 24bitカラーに対応させる
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " 文字色
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
-colorscheme iceberg " カラースキームにicebergを設定する
-
+"colorscheme iceberg " カラースキームにicebergを設定する
+"set background=dark
+"let g:gruvbox_material_background = 'soft'
+"colorscheme gruvbox-material
+colorscheme iceberg
 "----------------------------------------------------------
 " terminalの設定
 "----------------------------------------------------------
