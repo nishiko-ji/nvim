@@ -60,8 +60,8 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
 "colorscheme iceberg " カラースキームにicebergを設定する
 "set background=dark
 "let g:gruvbox_material_background = 'soft'
-"colorscheme gruvbox-material
-colorscheme iceberg
+colorscheme gruvbox-material
+" colorscheme iceberg
 "----------------------------------------------------------
 " terminalの設定
 "----------------------------------------------------------

@@ -4,7 +4,7 @@ hook_add = '''
   set laststatus=2
   set noshowmode
   let g:lightline = { 
-    \'colorscheme': 'iceberg',
+    \'colorscheme': 'gruvbox_material',
     \ 'active': {
     \   'left': [
     \     ['mode', 'paste'],
