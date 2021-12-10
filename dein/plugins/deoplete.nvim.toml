@@ -46,11 +46,17 @@ repo = 'deoplete-plugins/deoplete-jedi'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-# hook_add = '''
 #   let g:lsp_diagnostics_enabled = 0
-# '''
+# nnoremap <expr> <C-]> execute('LspPeekDefinition') =~ "not supported" ? "\<C-]>" : ":LspDefinition<cr>"
+# nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
+# nnoremap <expr> <C-}> execute('LspPeekDeclaration') =~ "not supported" ? "\<C-}>" : ":LspDeclaration<cr>"
+hook_add = '''
+  nnoremap <expr> <C-]> execute('LspPeekDefinition') =~ "not supported" ? "\<C-]>" : ":LspDefinition<cr>"
+  nnoremap <expr> <C-}> execute('LspPeekDeclaration') =~ "not supported" ? "\<C-}>" : ":LspDeclaration<cr>"
+'''
 [[plugins]]
 repo = 'lighttiger2505/deoplete-vim-lsp'
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
+

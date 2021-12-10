@@ -1,0 +1,8 @@
+[[plugins]]
+repo = 'heavenshell/vim-pydocstring'
+on_ft = ['python']
+hook_add = '''
+    let g:pydocstring_doq_path = '~/.espressif/python_env/idf4.2_py3.8_env/bin/doq'
+    let g:pydocstring_formatter = 'google'
+    nmap <silent> pd <Plug>(pydocstring)
+'''

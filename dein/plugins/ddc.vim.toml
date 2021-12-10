@@ -1,0 +1,84 @@
+# [[plugins]]
+# repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+ repo = 'Shougo/ddc.vim'
+ on_i = 1
+ hook_source = '''
+ inoremap <silent><expr> <TAB>
+      \ pumvisible() ? '<C-n>' :
+      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+      \ '<TAB>' : ddc#manual_complete()
+ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+ call ddc#custom#patch_global('sources', ['nvimlsp', 'around', 'vsnip', 'file'])
+ call ddc#custom#patch_global('sourceOptions', {
+      \ '_': {
+        \   'matchers': ['matcher_head'],
+        \   'sorters': ['sorter_rank'],
+        \ },
+        \ 'around': {'mark': 'A'},
+        \ 'file': {
+        \   'mark': 'F',
+        \   'isVolatile': v:true,
+        \   'forceCompletionPattern': '\S/\S*',
+        \ },
+        \ 'nvimlsp': {
+        \ 'matchers': ['matcher_head'],
+        \ 'mark': 'LSP',
+        \ 'forceCompletionPattern': '\.|:|->',
+        \},
+        \ })
+
+ call ddc#custom#patch_global('sourceParams', {
+      \ 'around': {'maxSize': 500},
+      \ 'nvimlsp': {'useIcon': v:true},
+      \ 'file': {'smartCase': v:true},
+      \ })
+
+ call ddc#custom#patch_filetype(
+    \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
+    \ 'sourceOptions': {
+    \   'file': {
+    \     'forceCompletionPattern': '\S\\\S*',
+    \   },
+    \ },
+    \ 'sourceParams': {
+    \   'file': {
+    \     'mode': 'win32',
+    \   },
+    \ }})
+
+ call ddc#enable()
+'''
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+#dein_lazy.toml
+# [[plugins]]
+#  repo = 'Shougo/ddc-around'
+#  on_source = ['ddc.vim']
+
+# [[plugins]]
+#  repo = 'Shougo/ddc-matcher_head'
+#  on_source = ['ddc.vim']
+
+# [[plugins]]
+#  repo = 'Shougo/ddc-sorter_rank'
+#  on_source = ['ddc.vim']
+
+# [[plugins]]
+#  repo = 'LumaKernel/ddc-file'
+#  on_source = ['ddc.vim']
+
+[[plugins]]
+ repo = 'Shougo/ddc-nvim-lsp'
+ on_i = 1
+
+# [[plugins]]
+#  repo = 'hrsh7th/vim-vsnip-integ'
+#  on_source = ['ddc.vim']
+
+# [[plugins]]
+#  repo = 'hrsh7th/vim-vsnip'
+#  on_source = ['ddc.vim']
