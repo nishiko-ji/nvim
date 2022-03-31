@@ -28,28 +28,28 @@ endif
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
   " 各プラグインのtomlを読み込む
-	call dein#load_toml( s:toml_dir . '/tcomment_vim.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/tcomment_vim.toml', {} )
 	"call dein#load_toml( s:toml_dir . '/vim-surround.toml', {} )
 	"call dein#load_toml( s:toml_dir . '/yankround.vim.toml', {} )
-	call dein#load_toml( s:toml_dir . '/neoterm.toml', {} )
-	call dein#load_toml( s:toml_dir . '/lightline.vim.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/neoterm.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/lightline.vim.toml', {} )
 	"call dein#load_toml( s:toml_dir . '/ctrlp.vim.toml', {} )
-	call dein#load_toml( s:toml_dir . '/awesome-vim-colorschemes.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/awesome-vim-colorschemes.toml', {} )
 	" call dein#load_toml( s:toml_dir . '/iceberg.vim.toml', {} )
-	call dein#load_toml( s:toml_dir . '/gruvbox-material.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/gruvbox-material.toml', {} )
 	" call dein#load_toml( s:toml_dir . '/tender.toml', {} )
-	call dein#load_toml( s:toml_dir . '/elly.toml', {} )
-	call dein#load_toml( s:toml_dir . '/smart_tabline.vim.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/elly.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/smart_tabline.vim.toml', {} )
 	"call dein#load_toml( s:toml_dir . '/vim-altercmd.toml', {} )
-	call dein#load_toml( s:toml_dir . '/defx-git.toml', {} )
-	call dein#load_toml( s:toml_dir . '/defx-icons.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/defx-git.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/defx-icons.toml', {} )
 	"call dein#load_toml( s:toml_dir . '/vim-devicons.toml', {} )
-	call dein#load_toml( s:toml_dir . '/defx.nvim.toml', {} )
-	call dein#load_toml( s:toml_dir . '/deoplete.nvim.toml', {} )
-	call dein#load_toml( s:toml_dir . '/vim-polyglot.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/defx.nvim.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/deoplete.nvim.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/vim-polyglot.toml', {} )
 	" call dein#load_toml( s:toml_dir . '/ddc.vim.toml', {} )
     " call dein#load_toml( s:toml_dir . '/nvim-lspconfig.toml', {} )
-	call dein#load_toml( s:toml_dir . '/vim-pydocstring.toml', {} )
+	" call dein#load_toml( s:toml_dir . '/vim-pydocstring.toml', {} )
 	call dein#end()
 	call dein#save_state()
 endif
@@ -67,11 +67,12 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
 "colorscheme iceberg " カラースキームにicebergを設定する
 "set background=dark
 "let g:gruvbox_material_background = 'soft'
-colorscheme gruvbox-material
+" colorscheme gruvbox-material
 " colorscheme iceberg
 " colorscheme tender
 " colorscheme elly
 " colorscheme sonokai
+
 "----------------------------------------------------------
 " terminalの設定
 "----------------------------------------------------------
@@ -125,20 +126,20 @@ if has("autocmd")
   "ファイルタイプに合わせたインデントを利用
   filetype indent on
   "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtabの略
-  autocmd FileType c           setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType cpp         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType c           setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType cpp         setlocal sw=2 sts=2 ts=2 et
   autocmd FileType java        setlocal sw=2 sts=2 ts=2 et
   autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType html        setlocal sw=2 sts=2 ts=2 et
   autocmd FileType ruby        setlocal sw=2 sts=2 ts=2 et
-  autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType js          setlocal sw=2 sts=2 ts=2 et
   " autocmd FileType zsh         setlocal sw=4 sts=4 ts=4 et
   " autocmd FileType scala       setlocal sw=4 sts=4 ts=4 et
   " autocmd FileType json        setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType css         setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType scss        setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType sass        setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType javascript  setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType css         setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType scss        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType sass        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType javascript  setlocal sw=2 sts=2 ts=2 et
 endif
 "----------------------------------------------------------
 " モード変更
