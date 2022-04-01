@@ -1,84 +1,94 @@
-# [[plugins]]
-# repo = 'vim-denops/denops.vim'
-
-[[plugins]]
- repo = 'Shougo/ddc.vim'
- on_i = 1
- hook_source = '''
- inoremap <silent><expr> <TAB>
-      \ pumvisible() ? '<C-n>' :
-      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-      \ '<TAB>' : ddc#manual_complete()
- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
- call ddc#custom#patch_global('sources', ['nvimlsp', 'around', 'vsnip', 'file'])
- call ddc#custom#patch_global('sourceOptions', {
-      \ '_': {
-        \   'matchers': ['matcher_head'],
-        \   'sorters': ['sorter_rank'],
-        \ },
-        \ 'around': {'mark': 'A'},
-        \ 'file': {
-        \   'mark': 'F',
-        \   'isVolatile': v:true,
-        \   'forceCompletionPattern': '\S/\S*',
-        \ },
-        \ 'nvimlsp': {
-        \ 'matchers': ['matcher_head'],
-        \ 'mark': 'LSP',
-        \ 'forceCompletionPattern': '\.|:|->',
-        \},
-        \ })
-
- call ddc#custom#patch_global('sourceParams', {
-      \ 'around': {'maxSize': 500},
-      \ 'nvimlsp': {'useIcon': v:true},
-      \ 'file': {'smartCase': v:true},
-      \ })
-
- call ddc#custom#patch_filetype(
-    \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
-    \ 'sourceOptions': {
-    \   'file': {
-    \     'forceCompletionPattern': '\S\\\S*',
-    \   },
-    \ },
-    \ 'sourceParams': {
-    \   'file': {
-    \     'mode': 'win32',
-    \   },
-    \ }})
-
- call ddc#enable()
-'''
+# ddcの動作に必要
 [[plugins]]
 repo = 'vim-denops/denops.vim'
 
-#dein_lazy.toml
+# denopsのテスト :DenopsHello -> Hello
 # [[plugins]]
-#  repo = 'Shougo/ddc-around'
-#  on_source = ['ddc.vim']
+# repo = 'vim-denops/denops-helloworld.vim'
 
-# [[plugins]]
-#  repo = 'Shougo/ddc-matcher_head'
-#  on_source = ['ddc.vim']
+# 自動補完
+[[plugins]]
+ repo = 'Shougo/ddc.vim'
+ on_event = ['InsertEnter']
+ depends = ['denops.vim']
+ hook_source = '''
+ call ddc#custom#patch_global('sources', ['nvim-lsp', 'around', 'vsnip'])
+ call ddc#custom#patch_global('sourceOptions', {
+      \ '_': {
+      \ 'matchers': ['matcher_head'],
+      \ 'sorters': ['sorter_rank'],
+      \ 'converters': ['converter_remove_overlap'],
+      \ },
+      \ 'around': {'mark': 'A'},
+      \ 'nvim-lsp': {
+      \ 'mark': 'L',
+      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \ },
+      \ })
 
-# [[plugins]]
-#  repo = 'Shougo/ddc-sorter_rank'
-#  on_source = ['ddc.vim']
+ call ddc#custom#patch_global('sourceParams', {
+      \ 'around': {'maxSize': 500},
+      \ })
 
-# [[plugins]]
-#  repo = 'LumaKernel/ddc-file'
-#  on_source = ['ddc.vim']
+ inoremap <silent><expr> <TAB>
+      \ ddc#map#pum_visible() ? '<C-n>' :
+      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+      \ '<TAB>' : ddc#map#manual_complete()
+ inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
 
+ call ddc#enable()
+ '''
+
+# ポップアップウィンドウを表示
+[[plugins]]
+ repo = 'Shougo/pum.vim'
+ on_source = ['ddc.vim']
+ hook_add = '''
+  autocmd User PumCompleteDone call vsnip_integ#on_complete_done(g:pum#completed_item)
+ '''
+
+# カーソル周辺の既出単語を補完
+[[plugins]]
+ repo = 'Shougo/ddc-around'
+ on_source = ['ddc.vim']
+
+# 入力中の単語を補完の対象にする
+[[plugins]]
+ repo = 'Shougo/ddc-matcher_head'
+ on_source = ['ddc.vim']
+
+# 補完候補を適切にソートする
+[[plugins]]
+ repo = "Shougo/ddc-sorter_rank"
+ on_source = ['ddc.vim']
+
+# 補完候補の重複に対応
+[[plugins]]
+ repo = 'Shougo/ddc-converter_remove_overlap'
+ on_source = ['ddc.vim']
+
+# lspを用いた補完
 [[plugins]]
  repo = 'Shougo/ddc-nvim-lsp'
- on_i = 1
+ on_source = ['ddc.vim']
+
+[[plugins]]
+ repo = 'hrsh7th/vim-vsnip'
+ on_event = 'InsertEnter'
+#  depends = ['vim-vsnip-integ', 'friendly-snippets']
+ depends = ['vim-vsnip-integ']
+ hook_add = '''
+ imap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
+ smap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
+ imap <expr> <C-f> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-f>'
+ smap <expr> <C-f> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-f>'
+ imap <expr> <C-b> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-b>'
+ smap <expr> <C-b> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-b>'
+ let g:vsnip_filetypes = {}
+ '''
+
+[[plugins]]
+ repo = 'hrsh7th/vim-vsnip-integ'
 
 # [[plugins]]
-#  repo = 'hrsh7th/vim-vsnip-integ'
-#  on_source = ['ddc.vim']
-
-# [[plugins]]
-#  repo = 'hrsh7th/vim-vsnip'
-#  on_source = ['ddc.vim']
+#  repo = 'rafamadriz/friendly-snippets'
