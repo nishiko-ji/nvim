@@ -27,7 +27,7 @@ endif
 " dein の設定
 if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
-  " 各プラグインのtomlを読み込む
+    " 各プラグインのtomlを読み込む
 	call dein#load_toml( s:toml_dir . '/tcomment_vim.toml', {} )
 	" call dein#load_toml( s:toml_dir . '/vim-surround.toml', {} )
 	call dein#load_toml( s:toml_dir . '/yankround.vim.toml', {} )
@@ -42,8 +42,8 @@ if dein#load_state(s:dein_dir)
 	call dein#load_toml( s:toml_dir . '/defx.nvim.toml', {} )
 	" call dein#load_toml( s:toml_dir . '/deoplete.nvim.toml', {} )
 	call dein#load_toml( s:toml_dir . '/vim-polyglot.toml', {} )
-	" call dein#load_toml( s:toml_dir . '/ddc.vim.toml', {} )
-    " call dein#load_toml( s:toml_dir . '/nvim-lspconfig.toml', {} )
+	call dein#load_toml( s:toml_dir . '/ddc.vim.toml', {} )
+    call dein#load_toml( s:toml_dir . '/nvim-lspconfig.toml', {} )
 	" call dein#load_toml( s:toml_dir . '/vim-pydocstring.toml', {} )
 	call dein#end()
 	call dein#save_state()
